@@ -1,0 +1,15 @@
+{
+  "name": "sdk-example",
+  "version": "1.0.0",
+  "main": "index.ts",
+  "scripts": {
+    "start": "npx tsx index.ts"
+  },
+  "author": "fabriq",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "@fabriqnetwork/sdk": "0.0.3",
+    "viem": "^2.21.45"
+  }
+}
