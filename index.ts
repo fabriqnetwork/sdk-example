@@ -4,10 +4,11 @@ import { optimismSepolia, sepolia } from 'viem/chains';
 import { privateKeyToAccount } from 'viem/accounts';
 
 // reach out on discord to get some testnet tokens
-const privateKey = 'ADD YOUR PRIVATE KEY HERE' as Hex
 const intentPoolURL = 'io.fabriq.sh:9997';
 
 async function main() {
+	const privateKey = process.argv[2] as Hex
+
 	const walletClientSepolia: WalletClient = createWalletClient({
 		account: privateKeyToAccount(privateKey),
 		chain: sepolia,
@@ -17,11 +18,11 @@ async function main() {
 	// get fabriq contract deployments for sepolia 
 	const sepoliaInfo = await getSupportedChainByID(sepolia.id);
 
-	// @ts-expect-error "viem WalletClient re-export error"
-	const intentClientSepolia = new IntentClient(walletClientSepolia, intentPoolURL, sepoliaInfo);
-
 	const tokensSepolia = await getTestnetTokensByChainID(sepolia.id);
 	const tokensOptimismSepolia = await getTestnetTokensByChainID(optimismSepolia.id);
+
+	// the IntentClient is used to create and submit intents
+	const intentClientSepolia = new IntentClient(walletClientSepolia, intentPoolURL, sepoliaInfo);
 
 	// fabriq uses permit2 for gasless token alowances
 	// if the permit2 contract is already approved, this does not do anything

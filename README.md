@@ -11,5 +11,5 @@ A minimal example script that bridges an ERC20 from Sepolia to OP Sepolia by pub
 
 ```
 npm install
-npm run start
+npm run start -- YOUR_PRIVATE_KEY
 ```
